@@ -1,0 +1,31 @@
+version: "3"
+services:
+  todo-app:
+    container_name: todo_app
+    build: .
+    image: todo-app
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+    networks:
+      - todo_app-mysql
+ 
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=management-todo-list 
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=123456
+    networks:
+      - todo_app-mysql
+networks:
+  todo_app-mysql:
+volumes:
+  mysql-data:

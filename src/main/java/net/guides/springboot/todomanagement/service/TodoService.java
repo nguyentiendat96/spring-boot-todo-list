@@ -18,7 +18,7 @@ public class TodoService implements ITodoService {
 
 	@Override
 	public List<Todo> getTodosByUser(String user) {
-		return todoRepository.findByUserName(user);
+		return todoRepository.findAll();
 	}
 
 	@Override
